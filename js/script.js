@@ -1,5 +1,6 @@
 var Crud = (function () {
 
+	//Load items from local storage
 	var loadItems = function () {
 
 		var data = localStorage.getItem("items");
@@ -20,20 +21,17 @@ var Crud = (function () {
 
 		var data = JSON.stringify(items);
 		localStorage.setItem("items", data);
-
 	}
 
 	var renderCounter = function () {
 		$("#count").html(items.length);
 	}
 
-	//Agrega un artista a los items
+	//Add new Item to list
 	var addItem = function (item) {
-
 		items.push(item);
 		saveItems();
 		renderCounter();
-
 	}
 
 	var editItem = function (itemId, itemNuevo) {
@@ -172,12 +170,12 @@ var Crud = (function () {
 
 			$("#inp" + item.id).show();
 
-			$("#inp" + item.id).change(function(){
+			$("#inp" + item.id).change(function () {
 				readURL(this, "i" + item.id);
 			});
 
 			//If Load new image, ovewrite imageEdit
-			$("#i" + item.id).on("load", function(){
+			$("#i" + item.id).on("load", function () {
 				imageEdit = $("#i" + item.id).attr("src");
 			})
 
@@ -228,9 +226,7 @@ var Crud = (function () {
 			for (var j = 0; j < items.length; j++) {
 
 				if (items[j].id == newOrder[i]) {
-
 					itemsReordered.push(items[j]);
-
 				}
 			}
 		}
@@ -239,32 +235,30 @@ var Crud = (function () {
 		saveItems();
 	}
 
-
 	var loadEvents = function () {
-
-
-		$("#uploadImage").change(function(){
+		//Get uploaded image
+		$("#uploadImage").change(function () {
 			readURL(this, "preview");
 		});
 
 		//If Load new image, ovewrite imageEdit
-		$("#preview").on("load", function(){
+		$("#preview").on("load", function () {
 			inputImage = $("#preview").attr("src");
 		})
 
+		//Add new Item
 		$("#addItem").on("click", function () {
-
 			inputImage = $("#preview").attr("src")
 			inputDesc = $("#description").val();
-
 			itemsLen = items.length;
 
-			var img = document.getElementById('preview'); 
+			var img = document.getElementById('preview');
 			var width = img.clientWidth;
 			var height = img.clientHeight;
 
 			item = { "id": itemsLen, "desc": inputDesc, "image": inputImage };
 
+			//Check description and image
 			if (inputDesc.length > 300) {
 
 				alert("Description: max 300 chars");
@@ -276,7 +270,6 @@ var Crud = (function () {
 				alert("Size of image must be 320px x 320px")
 
 			} else {
-
 				addItem(item);
 				// Clear input for new item
 				$("#description").val("");
@@ -290,7 +283,7 @@ var Crud = (function () {
 
 		});
 
-
+		//Update Counter
 		$("#count").ready(function () {
 
 			$("#count").html(items.length);
@@ -301,7 +294,6 @@ var Crud = (function () {
 			connectWith: '#listItems',
 			update: function () {
 				var order = $(this).sortable('toArray');
-
 				saveNewOrder(order);
 			}
 		});
@@ -309,7 +301,6 @@ var Crud = (function () {
 	}
 
 	var start = function () {
-
 		loadEvents();
 		renderItems();
 	}
