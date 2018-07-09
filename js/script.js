@@ -205,6 +205,7 @@ var Crud = (function () {
 				editItem(item.id, newItem);
 
 				buttonSaveItem.hide();
+				$("#inp" + item.id).hide();
 
 			});
 
