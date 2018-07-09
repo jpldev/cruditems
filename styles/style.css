@@ -1,0 +1,33 @@
+ul#listItems {
+    padding-top: 15px;
+}
+
+h1 {
+    position: relative;
+    display: inline;
+}
+
+div#edit{
+    display: none;
+}
+
+div#contenido{
+    margin-top: 8%;
+}
+
+input#description{
+    height: 280px;
+    width: 600px;
+}
+
+input#uploadImage {padding-bottom: 10px;margin-left: 150px;}
+
+button#addItem{
+    margin-top: 50px;
+}
+
+canvas#canvas{
+    display: none;
+    width: 320px;
+    height: 320px;
+}
